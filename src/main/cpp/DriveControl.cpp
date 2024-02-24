@@ -58,7 +58,7 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
   T_PID_Cal         L_Index2 = E_P_Gx;
   T_RobotCorner     L_Index3 = E_FrontLeft;
 
-  #ifndef PID_Calibrate
+  // #ifndef PID_Calibrate
   //This set of PID assignments are for the hard coded values
   // set PID coefficients
   m_frontLeftDrivePID.SetP(K_SD_WheelSpeedPID_V2_Gx[E_kP]);
@@ -88,7 +88,7 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
   m_rearRightDrivePID.SetIZone(K_SD_WheelSpeedPID_V2_Gx[E_kIz]);
   m_rearRightDrivePID.SetFF(K_SD_WheelSpeedPID_V2_Gx[E_kFF]);
   m_rearRightDrivePID.SetOutputRange(K_SD_WheelSpeedPID_V2_Gx[E_kMinOutput], K_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]);
-  #endif
+  // #endif
   
   #ifdef PID_Calibrate
   
@@ -261,6 +261,8 @@ void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_frontLeftDrivePID,
                             rev::SparkMaxPIDController m_rearLeftDrivePID,
                             rev::SparkMaxPIDController m_rearRightDrivePID){
 
+                              
+#ifdef PID_Calibrate
   frc::SmartDashboard::PutNumber("Frontleft_P", shuffleboard_FrontleftPID.P);
   frc::SmartDashboard::PutNumber("Frontleft_P_LL", shuffleboard_FrontleftPID.P_LL);
   frc::SmartDashboard::PutNumber("Frontleft_P_UL", shuffleboard_FrontleftPID.P_UL);
@@ -292,7 +294,7 @@ void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_frontLeftDrivePID,
   m_rearRightDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
   m_rearRightDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
   m_rearRightDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
-
+#endif
 
 }
 

@@ -9,7 +9,8 @@
 #define PracticeBot
 
 // New PID calibration things
-#define PID_Calibrate
+/*DOES NOT WORK!*/
+// #define PID_Calibrate
 
 #define NewVision // NewVision or OldVision
 #define visionTest

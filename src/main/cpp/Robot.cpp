@@ -407,7 +407,7 @@ void Robot::AutonomousPeriodic()
  ******************************************************************************/
 void Robot::TeleopInit()
 {
-  shuffleboard_init();
+  // shuffleboard_init();
   SwerveDriveReconfigPID(m_frontLeftDrivePID, 
                               m_frontRightDrivePID, 
                               m_rearLeftDrivePID, 

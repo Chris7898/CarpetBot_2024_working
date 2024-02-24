@@ -4,7 +4,7 @@ Team 5561 Shuffleboard PID code
 Writen by - Chris & Wes 2024
 
 */
-
+#ifdef Shuffleboard
 #include <frc/shuffleboard/Shuffleboard.h>
 #include "Shuffleboard.hpp"
 #include <networktables/NetworkTable.h>
@@ -72,3 +72,5 @@ shuffleboard_SteerFrontleftPID.LL = LL_FrontLeftSteer_entry->GetDouble(0.0);
 shuffleboard_SteerFrontleftPID.Iz = Iz_FrontLeftSteer_entry->GetDouble(0.0);
 shuffleboard_SteerFrontleftPID.FF = FF_FrontLeftSteer_entry->GetDouble(0.0);
 }
+
+#endif
