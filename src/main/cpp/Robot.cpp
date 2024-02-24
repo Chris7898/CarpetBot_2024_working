@@ -1,9 +1,8 @@
 /*
- * Team 5561 2023 Code
+ * Team 5561 2024 Chasis bot Code with the 2023 code added
  *
- * This code runs the 2023 robot which is capable of the following:
- * - Swerve Drive (beta 02/10/2020)
- * - Manipulator (Turret and Grabber) 
+ * This code runs the 2024 chasis robot which is capable of the following:
+ * - Swerve Drive (beta 02/10/2020) 
  * */
 
 #include "Robot.h"
