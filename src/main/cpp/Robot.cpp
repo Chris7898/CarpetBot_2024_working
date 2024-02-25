@@ -319,7 +319,12 @@ frc::SmartDashboard::PutNumber("Wheel speed Angle 3", VaDRC_Pct_WheelAngleCmnd[E
                    false,
                    &VeLC_b_CameraLightCmndOn,
                    &VeLC_Cmd_VanityLightCmnd);
+
+
 frc::SmartDashboard::PutNumber("GyroPitch", VeGRY_Deg_GyroPitchAngleDegrees);
+frc::SmartDashboard::PutNumber("GyroYaw", -VeGRY_Deg_GyroYawAngleDegrees);
+// frc::SmartDashboard::PutNumber("GyroYaw", VeGRY_Rad_GyroYawAngleRad);
+
 #ifdef NewVision
   // frc::SmartDashboard::PutNumber("Tag Offset X", V_OffsetXOut);
   // frc::SmartDashboard::PutNumber("Tag Offset Y", V_OffsetYOut);
