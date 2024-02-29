@@ -1,6 +1,5 @@
 #ifndef ROBOT
 #define ROBOT
-// #define PID_Calibrate
 
 #pragma once
 
@@ -26,7 +25,7 @@
 // #include <photonlib/photonlibUtils.h>
 // #include <cstdio>
 // #include <cameraserver/CameraServer.h>
-// #include "Shuffleboard.hpp"
+#include "Shuffleboard.hpp"
 
 #include "Const.hpp"
 
@@ -50,10 +49,7 @@ class Robot : public frc::TimedRobot {
   frc::AnalogInput a_encoderRearRightSteer{0};
   #endif
 
-  frc::ShuffleboardTab& FrontLeft = frc::Shuffleboard::GetTab("Front Left");
-  frc::ShuffleboardTab& FrontRight = frc::Shuffleboard::GetTab("Front Right");
-  frc::ShuffleboardTab& BackLeft = frc::Shuffleboard::GetTab("Back Left");
-  frc::ShuffleboardTab& BackRight = frc::Shuffleboard::GetTab("Back Right");
+  frc::ShuffleboardTab& FrontLeft = frc::Shuffleboard::GetTab("Drive PID's");
  
   
   //DIO - Inputs / Outputs
@@ -77,10 +73,10 @@ class Robot : public frc::TimedRobot {
   rev::CANSparkMax                           m_rearRightSteerMotor {rearRightSteerDeviceID,  rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax                           m_rearRightDriveMotor {rearRightDriveDeviceID,  rev::CANSparkMax::MotorType::kBrushless};
 
-  rev::SparkMaxPIDController                 m_frontLeftDrivePID    = m_frontLeftDriveMotor.GetPIDController();
-  rev::SparkMaxPIDController                 m_frontRightDrivePID   = m_frontRightDriveMotor.GetPIDController();
-  rev::SparkMaxPIDController                 m_rearLeftDrivePID     = m_rearLeftDriveMotor.GetPIDController();
-  rev::SparkMaxPIDController                 m_rearRightDrivePID    = m_rearRightDriveMotor.GetPIDController();
+  rev::SparkMaxPIDController                 m_DrivePID    = m_frontLeftDriveMotor.GetPIDController();
+  rev::SparkMaxPIDController                 m_DrivePID   = m_frontRightDriveMotor.GetPIDController();
+  rev::SparkMaxPIDController                 m_DrivePID     = m_rearLeftDriveMotor.GetPIDController();
+  rev::SparkMaxPIDController                 m_DrivePID    = m_rearRightDriveMotor.GetPIDController();
   
   #ifdef CompBot
   rev::CANSparkMax                           m_ArmPivot            {KeMAN_i_ArmPivot,        rev::CANSparkMax::MotorType::kBrushless};
@@ -121,7 +117,6 @@ class Robot : public frc::TimedRobot {
   rev::SparkMaxRelativeEncoder               m_GripperEncoder         = m_Gripper.GetEncoder();
   #endif
 
-   // ShuffleboardTab& tab;
 
   // Driver Inputs
   frc::Joystick c_joyStick{0};
