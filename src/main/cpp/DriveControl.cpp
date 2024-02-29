@@ -49,7 +49,7 @@ double KV_SD_WheelGx[E_RobotCornerSz];
  *               - Steer (power cmnd only)
  *               - Drive (PID Control in motor controller)
  ******************************************************************************/
-void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
+void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_DrivePID,
                                  rev::SparkMaxPIDController m_frontRightDrivePID,
                                  rev::SparkMaxPIDController m_rearLeftDrivePID,
                                  rev::SparkMaxPIDController m_rearRightDrivePID)
@@ -61,12 +61,12 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
   #ifndef PID_Calibrate
   //This set of PID assignments are for the hard coded values
   // set PID coefficients
-  m_frontLeftDrivePID.SetP(K_SD_WheelSpeedPID_V2_Gx[E_kP]);
-  m_frontLeftDrivePID.SetI(K_SD_WheelSpeedPID_V2_Gx[E_kI]);
-  m_frontLeftDrivePID.SetD(K_SD_WheelSpeedPID_V2_Gx[E_kD]);
-  m_frontLeftDrivePID.SetIZone(K_SD_WheelSpeedPID_V2_Gx[E_kIz]);
-  m_frontLeftDrivePID.SetFF(K_SD_WheelSpeedPID_V2_Gx[E_kFF]);
-  m_frontLeftDrivePID.SetOutputRange(K_SD_WheelSpeedPID_V2_Gx[E_kMinOutput], K_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]);
+  m_DrivePID.SetP(K_SD_WheelSpeedPID_V2_Gx[E_kP]);
+  m_DrivePID.SetI(K_SD_WheelSpeedPID_V2_Gx[E_kI]);
+  m_DrivePID.SetD(K_SD_WheelSpeedPID_V2_Gx[E_kD]);
+  m_DrivePID.SetIZone(K_SD_WheelSpeedPID_V2_Gx[E_kIz]);
+  m_DrivePID.SetFF(K_SD_WheelSpeedPID_V2_Gx[E_kFF]);
+  m_DrivePID.SetOutputRange(K_SD_WheelSpeedPID_V2_Gx[E_kMinOutput], K_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]);
 
   m_frontRightDrivePID.SetP(K_SD_WheelSpeedPID_V2_Gx[E_kP]);
   m_frontRightDrivePID.SetI(K_SD_WheelSpeedPID_V2_Gx[E_kI]);
@@ -92,37 +92,37 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
   
   #ifdef PID_Calibrate
   
-  frc::SmartDashboard::PutNumber("Frontleft_P", shuffleboard_FrontleftPID.P);
-  frc::SmartDashboard::PutNumber("Frontleft_P_LL", shuffleboard_FrontleftPID.P_LL);
-  frc::SmartDashboard::PutNumber("Frontleft_P_UL", shuffleboard_FrontleftPID.P_UL);
+  frc::SmartDashboard::PutNumber("Frontleft_P", m_DrivePID.P);
+  frc::SmartDashboard::PutNumber("Frontleft_P_LL", m_DrivePID.P_LL);
+  frc::SmartDashboard::PutNumber("Frontleft_P_UL", m_DrivePID.P_UL);
 
-  m_frontLeftDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_frontLeftDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_frontLeftDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_frontLeftDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_frontLeftDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_frontLeftDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_DrivePID.SetP(m_DrivePID.P);
+  m_DrivePID.SetI(m_DrivePID.I);
+  m_DrivePID.SetD(m_DrivePID.D);
+  m_DrivePID.SetIZone(m_DrivePID.Iz);
+  m_DrivePID.SetFF(m_DrivePID.FF);
+  m_DrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_frontRightDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_frontRightDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_frontRightDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_frontRightDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_frontRightDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_frontRightDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_frontRightDrivePID.SetP(m_DrivePID.P);
+  m_frontRightDrivePID.SetI(m_DrivePID.I);
+  m_frontRightDrivePID.SetD(m_DrivePID.D);
+  m_frontRightDrivePID.SetIZone(m_DrivePID.Iz);
+  m_frontRightDrivePID.SetFF(m_DrivePID.FF);
+  m_frontRightDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_rearLeftDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_rearLeftDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_rearLeftDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_rearLeftDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_rearLeftDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_rearLeftDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_rearLeftDrivePID.SetP(m_DrivePID.P);
+  m_rearLeftDrivePID.SetI(m_DrivePID.I);
+  m_rearLeftDrivePID.SetD(m_DrivePID.D);
+  m_rearLeftDrivePID.SetIZone(m_DrivePID.Iz);
+  m_rearLeftDrivePID.SetFF(m_DrivePID.FF);
+  m_rearLeftDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_rearRightDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_rearRightDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_rearRightDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_rearRightDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_rearRightDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_rearRightDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_rearRightDrivePID.SetP(m_DrivePID.P);
+  m_rearRightDrivePID.SetI(m_DrivePID.I);
+  m_rearRightDrivePID.SetD(m_DrivePID.D);
+  m_rearRightDrivePID.SetIZone(m_DrivePID.Iz);
+  m_rearRightDrivePID.SetFF(m_DrivePID.FF);
+  m_rearRightDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
   #endif
 
@@ -204,7 +204,7 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
  *               - Steer (power cmnd only)
  *               - Drive (PID Control in motor controller)
  ******************************************************************************/
-void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_frontLeftDrivePID,
+void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_DrivePID,
                                 rev::SparkMaxPIDController m_frontRightDrivePID,
                                 rev::SparkMaxPIDController m_rearLeftDrivePID,
                                 rev::SparkMaxPIDController m_rearRightDrivePID)
@@ -228,16 +228,16 @@ void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_frontLeftDrivePID,
   KV_SD_WheelGx[E_RearLeft] = frc::SmartDashboard::GetNumber("KV_SD_WheelGx[E_RearLeft]", KV_SD_WheelGx[E_RearLeft]);
   KV_SD_WheelGx[E_RearRight] = frc::SmartDashboard::GetNumber("KV_SD_WheelGx[E_RearRight]", KV_SD_WheelGx[E_RearRight]);
 
-  if((L_p != KV_SD_WheelSpeedPID_V2_Gx[E_kP]))   { m_frontLeftDrivePID.SetP(L_p); m_frontRightDrivePID.SetP(L_p); m_rearLeftDrivePID.SetP(L_p); m_rearRightDrivePID.SetP(L_p); KV_SD_WheelSpeedPID_V2_Gx[E_kP] = L_p; }
-  if((L_i != KV_SD_WheelSpeedPID_V2_Gx[E_kI]))   { m_frontLeftDrivePID.SetI(L_i); m_frontRightDrivePID.SetI(L_i); m_rearLeftDrivePID.SetI(L_i); m_rearRightDrivePID.SetI(L_i); KV_SD_WheelSpeedPID_V2_Gx[E_kI] = L_i; }
-  if((L_d != KV_SD_WheelSpeedPID_V2_Gx[E_kD]))   { m_frontLeftDrivePID.SetD(L_d); m_frontRightDrivePID.SetD(L_d); m_rearLeftDrivePID.SetD(L_d); m_rearRightDrivePID.SetD(L_d); KV_SD_WheelSpeedPID_V2_Gx[E_kD] = L_d; }
-  if((L_iz != KV_SD_WheelSpeedPID_V2_Gx[E_kIz])) { m_frontLeftDrivePID.SetIZone(L_iz); m_frontRightDrivePID.SetIZone(L_iz); m_rearLeftDrivePID.SetIZone(L_iz); m_rearRightDrivePID.SetIZone(L_iz); KV_SD_WheelSpeedPID_V2_Gx[E_kIz] = L_iz; }
-  if((L_ff != KV_SD_WheelSpeedPID_V2_Gx[E_kFF])) { m_frontLeftDrivePID.SetFF(L_ff); m_frontRightDrivePID.SetFF(L_ff); m_rearLeftDrivePID.SetFF(L_ff); m_rearRightDrivePID.SetFF(L_ff); KV_SD_WheelSpeedPID_V2_Gx[E_kFF] = L_ff; }
-  if((L_max != KV_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]) || (L_min != KV_SD_WheelSpeedPID_V2_Gx[E_kMinOutput])) { m_frontLeftDrivePID.SetOutputRange(L_min, L_max); m_frontRightDrivePID.SetOutputRange(L_min, L_max);  m_rearLeftDrivePID.SetOutputRange(L_min, L_max); m_rearRightDrivePID.SetOutputRange(L_min, L_max); KV_SD_WheelSpeedPID_V2_Gx[E_kMinOutput] = L_min; KV_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput] = L_max; }
+  if((L_p != KV_SD_WheelSpeedPID_V2_Gx[E_kP]))   { m_DrivePID.SetP(L_p); m_frontRightDrivePID.SetP(L_p); m_rearLeftDrivePID.SetP(L_p); m_rearRightDrivePID.SetP(L_p); KV_SD_WheelSpeedPID_V2_Gx[E_kP] = L_p; }
+  if((L_i != KV_SD_WheelSpeedPID_V2_Gx[E_kI]))   { m_DrivePID.SetI(L_i); m_frontRightDrivePID.SetI(L_i); m_rearLeftDrivePID.SetI(L_i); m_rearRightDrivePID.SetI(L_i); KV_SD_WheelSpeedPID_V2_Gx[E_kI] = L_i; }
+  if((L_d != KV_SD_WheelSpeedPID_V2_Gx[E_kD]))   { m_DrivePID.SetD(L_d); m_frontRightDrivePID.SetD(L_d); m_rearLeftDrivePID.SetD(L_d); m_rearRightDrivePID.SetD(L_d); KV_SD_WheelSpeedPID_V2_Gx[E_kD] = L_d; }
+  if((L_iz != KV_SD_WheelSpeedPID_V2_Gx[E_kIz])) { m_DrivePID.SetIZone(L_iz); m_frontRightDrivePID.SetIZone(L_iz); m_rearLeftDrivePID.SetIZone(L_iz); m_rearRightDrivePID.SetIZone(L_iz); KV_SD_WheelSpeedPID_V2_Gx[E_kIz] = L_iz; }
+  if((L_ff != KV_SD_WheelSpeedPID_V2_Gx[E_kFF])) { m_DrivePID.SetFF(L_ff); m_frontRightDrivePID.SetFF(L_ff); m_rearLeftDrivePID.SetFF(L_ff); m_rearRightDrivePID.SetFF(L_ff); KV_SD_WheelSpeedPID_V2_Gx[E_kFF] = L_ff; }
+  if((L_max != KV_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]) || (L_min != KV_SD_WheelSpeedPID_V2_Gx[E_kMinOutput])) { m_DrivePID.SetOutputRange(L_min, L_max); m_frontRightDrivePID.SetOutputRange(L_min, L_max);  m_rearLeftDrivePID.SetOutputRange(L_min, L_max); m_rearRightDrivePID.SetOutputRange(L_min, L_max); KV_SD_WheelSpeedPID_V2_Gx[E_kMinOutput] = L_min; KV_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput] = L_max; }
   if((L_maxV != KV_SD_WheelSpeedPID_V2_Gx[E_kMaxVel])) { KV_SD_WheelSpeedPID_V2_Gx[E_kMaxVel] = L_maxV; }
-  // if((L_minV != KV_SD_WheelSpeedPID_V2_Gx[E_kMinVel])) { m_frontLeftDrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_frontRightDrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_rearLeftDrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_rearRightDrivePID.SetSmartMotionMinOutputVelocity(L_minV); KV_SD_WheelSpeedPID_V2_Gx[E_kMinVel] = L_minV; }
+  // if((L_minV != KV_SD_WheelSpeedPID_V2_Gx[E_kMinVel])) { m_DrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_frontRightDrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_rearLeftDrivePID.SetSmartMotionMinOutputVelocity(L_minV); m_rearRightDrivePID.SetSmartMotionMinOutputVelocity(L_minV); KV_SD_WheelSpeedPID_V2_Gx[E_kMinVel] = L_minV; }
   if((L_maxA != KV_SD_WheelSpeedPID_V2_Gx[E_kMaxAcc])) { KV_SD_WheelSpeedRampRate = L_maxA; KV_SD_WheelSpeedPID_V2_Gx[E_kMaxAcc] = L_maxA; }
-  // if((L_allE != KV_SD_WheelSpeedPID_V2_Gx[E_kAllErr])) { m_frontLeftDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_frontRightDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_rearLeftDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_rearRightDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); KV_SD_WheelSpeedPID_V2_Gx[E_kAllErr] = L_allE; }
+  // if((L_allE != KV_SD_WheelSpeedPID_V2_Gx[E_kAllErr])) { m_DrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_frontRightDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_rearLeftDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); m_rearRightDrivePID.SetSmartMotionAllowedClosedLoopError(L_allE); KV_SD_WheelSpeedPID_V2_Gx[E_kAllErr] = L_allE; }
   #endif
   #ifdef WheelAngleTest
   KV_SD_WheelAnglePID_Gx[E_P_Gx] = frc::SmartDashboard::GetNumber("P Gain", 0);
@@ -256,44 +256,44 @@ void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_frontLeftDrivePID,
   #endif
   }
 
-void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_frontLeftDrivePID,
+void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_DrivePID,
                             rev::SparkMaxPIDController m_frontRightDrivePID,
                             rev::SparkMaxPIDController m_rearLeftDrivePID,
                             rev::SparkMaxPIDController m_rearRightDrivePID){
 
                               
 #ifdef PID_Calibrate
-  frc::SmartDashboard::PutNumber("Frontleft_P", shuffleboard_FrontleftPID.P);
-  frc::SmartDashboard::PutNumber("Frontleft_P_LL", shuffleboard_FrontleftPID.P_LL);
-  frc::SmartDashboard::PutNumber("Frontleft_P_UL", shuffleboard_FrontleftPID.P_UL);
+  frc::SmartDashboard::PutNumber("Frontleft_P", m_DrivePID.P);
+  frc::SmartDashboard::PutNumber("Frontleft_P_LL", m_DrivePID.P_LL);
+  frc::SmartDashboard::PutNumber("Frontleft_P_UL", m_DrivePID.P_UL);
 
-  m_frontLeftDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_frontLeftDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_frontLeftDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_frontLeftDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_frontLeftDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_frontLeftDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_DrivePID.SetP(m_DrivePID.P);
+  m_DrivePID.SetI(m_DrivePID.I);
+  m_DrivePID.SetD(m_DrivePID.D);
+  m_DrivePID.SetIZone(m_DrivePID.Iz);
+  m_DrivePID.SetFF(m_DrivePID.FF);
+  m_DrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_frontRightDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_frontRightDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_frontRightDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_frontRightDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_frontRightDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_frontRightDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_frontRightDrivePID.SetP(m_DrivePID.P);
+  m_frontRightDrivePID.SetI(m_DrivePID.I);
+  m_frontRightDrivePID.SetD(m_DrivePID.D);
+  m_frontRightDrivePID.SetIZone(m_DrivePID.Iz);
+  m_frontRightDrivePID.SetFF(m_DrivePID.FF);
+  m_frontRightDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_rearLeftDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_rearLeftDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_rearLeftDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_rearLeftDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_rearLeftDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_rearLeftDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_rearLeftDrivePID.SetP(m_DrivePID.P);
+  m_rearLeftDrivePID.SetI(m_DrivePID.I);
+  m_rearLeftDrivePID.SetD(m_DrivePID.D);
+  m_rearLeftDrivePID.SetIZone(m_DrivePID.Iz);
+  m_rearLeftDrivePID.SetFF(m_DrivePID.FF);
+  m_rearLeftDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 
-  m_rearRightDrivePID.SetP(shuffleboard_FrontleftPID.P);
-  m_rearRightDrivePID.SetI(shuffleboard_FrontleftPID.I);
-  m_rearRightDrivePID.SetD(shuffleboard_FrontleftPID.D);
-  m_rearRightDrivePID.SetIZone(shuffleboard_FrontleftPID.Iz);
-  m_rearRightDrivePID.SetFF(shuffleboard_FrontleftPID.FF);
-  m_rearRightDrivePID.SetOutputRange(shuffleboard_FrontleftPID.LL, shuffleboard_FrontleftPID.UL);
+  m_rearRightDrivePID.SetP(m_DrivePID.P);
+  m_rearRightDrivePID.SetI(m_DrivePID.I);
+  m_rearRightDrivePID.SetD(m_DrivePID.D);
+  m_rearRightDrivePID.SetIZone(m_DrivePID.Iz);
+  m_rearRightDrivePID.SetFF(m_DrivePID.FF);
+  m_rearRightDrivePID.SetOutputRange(m_DrivePID.LL, m_DrivePID.UL);
 #endif
 
 }
