@@ -58,7 +58,7 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_DrivePID,
   T_PID_Cal         L_Index2 = E_P_Gx;
   T_RobotCorner     L_Index3 = E_FrontLeft;
 
-  #ifndef PID_Calibrate
+  // #ifndef PID_Calibrate
   //This set of PID assignments are for the hard coded values
   // set PID coefficients
   m_DrivePID.SetP(K_SD_WheelSpeedPID_V2_Gx[E_kP]);
@@ -88,7 +88,7 @@ void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_DrivePID,
   m_rearRightDrivePID.SetIZone(K_SD_WheelSpeedPID_V2_Gx[E_kIz]);
   m_rearRightDrivePID.SetFF(K_SD_WheelSpeedPID_V2_Gx[E_kFF]);
   m_rearRightDrivePID.SetOutputRange(K_SD_WheelSpeedPID_V2_Gx[E_kMinOutput], K_SD_WheelSpeedPID_V2_Gx[E_kMaxOutput]);
-  #endif
+  // #endif
   
   #ifdef PID_Calibrate
   

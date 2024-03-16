@@ -6,11 +6,11 @@
 // Define the desired test state here: COMP (no test), BallHandlerTest, Manipulator_Test, DriveMotorTest, WheelAngleTest, ADAS_DM_Test
 #define COMP
 // Define the bot type: CompBot, PracticeBot
-#define CompBot
+#define PracticeBot
 
 // New PID calibration things
-// WORKS FOR PID's
-#define PID_Calibrate
+/*DOES NOT WORK!*/
+// #define PID_Calibrate
 
 #define NewVision // NewVision or OldVision
 #define visionTest
@@ -497,13 +497,9 @@ const double K_SD_WheelMaxSpeed = 6000;
 const double Ke_RPM_SD_WheelMinCmndSpeed = 0.2;
 
 /* K_SD_WheelSpeedPID_V2_Gx: PID gains for the driven wheels that is within the motor controllers. */
-const double K_SD_WheelSpeedPID_V2_Gx[E_PID_SparkMaxCalSz] = { 
-                                                              // Shuffleboard_DrivePID.P,  
-                                                              // Shuffleboard_DrivePID.I,    
-                                                              // Shuffleboard_DrivePID.D,         
-                                                              0.000350, // kP        
-                                                              0.000001, // kI
-                                                              0.000001, // kD
+const double K_SD_WheelSpeedPID_V2_Gx[E_PID_SparkMaxCalSz] = { 0.000350, // kP
+                                                               0.000001, // kI
+                                                               0.000001, // kD
                                                                0.0,      // kIz
                                                                0.0,      // kFF
                                                                1.0,      // kMaxOutput

@@ -18,7 +18,7 @@ struct Shuffleboard_PID {
     double Iz, FF;
 };
 
-extern Shuffleboard_PID Shuffleboard_DrivePID;
-extern Shuffleboard_PID Shuffleboard_SteerPID;
+extern Shuffleboard_PID shuffleboard_FrontleftPID;
+extern Shuffleboard_PID shuffleboard_SteerFrontleftPID;
 
 #endif

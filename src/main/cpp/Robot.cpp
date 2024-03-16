@@ -42,10 +42,10 @@ void Robot::RobotMotorCommands()
   // Swerve stear motors
   if (VeDRC_b_DriveWheelsInPID == true)
   {
-    m_DrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_FrontLeft], rev::CANSparkMax::ControlType::kVelocity); // rev::ControlType::kVelocity
-    m_DrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_FrontRight], rev::CANSparkMax::ControlType::kVelocity);
-    m_DrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_RearLeft], rev::CANSparkMax::ControlType::kVelocity);
-    m_DrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_RearRight], rev::CANSparkMax::ControlType::kVelocity);
+    m_frontLeftDrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_FrontLeft], rev::CANSparkMax::ControlType::kVelocity); // rev::ControlType::kVelocity
+    m_frontRightDrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_FrontRight], rev::CANSparkMax::ControlType::kVelocity);
+    m_rearLeftDrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_RearLeft], rev::CANSparkMax::ControlType::kVelocity);
+    m_rearRightDrivePID.SetReference(VaDRC_RPM_WheelSpeedCmnd[E_RearRight], rev::CANSparkMax::ControlType::kVelocity);
     m_frontLeftSteerMotor.Set(VaDRC_Pct_WheelAngleCmnd[E_FrontLeft]);
     m_frontRightSteerMotor.Set(VaDRC_Pct_WheelAngleCmnd[E_FrontRight]);
     m_rearLeftSteerMotor.Set(VaDRC_Pct_WheelAngleCmnd[E_RearLeft]);
@@ -110,7 +110,7 @@ void Robot::RobotInit()
                    m_WristEncoder,
                    m_GripperEncoder);
 
-  // bool CompressorEnable = m_pcmCompressor.Enabled();
+  bool CompressorEnable = m_pcmCompressor.Enabled();
 #endif
 
   GyroInit();
@@ -163,12 +163,12 @@ void Robot::RobotInit()
   ADAS_MN_Reset();
   ManipulatorControlInit();
 #endif
-//  ShuffleboardTab& tab = Shuffleboard::GetTab("LF_PID_P");
+ // ShuffleboardTab& tab = Shuffleboard::GetTab("LF_PID_P");
 
-  SwerveDriveMotorConfigsInit(m_DrivePID,
-                              m_DrivePID,
-                              m_DrivePID,
-                              m_DrivePID);
+  SwerveDriveMotorConfigsInit(m_frontLeftDrivePID,
+                              m_frontRightDrivePID,
+                              m_rearLeftDrivePID,
+                              m_rearRightDrivePID);
 
   ADAS_Main_Init();
   ADAS_Main_Reset();
@@ -339,10 +339,10 @@ frc::SmartDashboard::PutNumber("GyroYaw", -VeGRY_Deg_GyroYawAngleDegrees);
 #endif
 
   /* These function calls are for test mode calibration. */
-  SwerveDriveMotorConfigsCal(m_DrivePID,
-                             m_DrivePID,
-                             m_DrivePID,
-                             m_DrivePID);
+  SwerveDriveMotorConfigsCal(m_frontLeftDrivePID,
+                             m_frontRightDrivePID,
+                             m_rearLeftDrivePID,
+                             m_rearRightDrivePID);
 
   ADAS_DM_ConfigsCal();
 #ifdef CompBot
@@ -412,13 +412,11 @@ void Robot::AutonomousPeriodic()
  ******************************************************************************/
 void Robot::TeleopInit()
 {
-  #ifdef PID_Calibrate
-  shuffleboard_init();
-  #endif
-  SwerveDriveReconfigPID(m_DrivePID, 
-                              m_DrivePID, 
-                              m_DrivePID, 
-                              m_DrivePID);
+  // shuffleboard_init();
+  SwerveDriveReconfigPID(m_frontLeftDrivePID, 
+                              m_frontRightDrivePID, 
+                              m_rearLeftDrivePID, 
+                              m_rearRightDrivePID);
 
   VeROBO_e_RobotState = E_Teleop;
   VeROBO_e_AllianceColor = frc::DriverStation::Alliance::kBlue;

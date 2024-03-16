@@ -14,15 +14,15 @@ extern double VaDRC_RPM_WheelSpeedCmnd[E_RobotCornerSz];
 extern bool   VeDRC_b_DriveWheelsInPID;
 
 
-void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_DrivePID,
-                                 rev::SparkMaxPIDController m_DrivePID,
-                                 rev::SparkMaxPIDController m_DrivePID,
-                                 rev::SparkMaxPIDController m_DrivePID);
+void SwerveDriveMotorConfigsInit(rev::SparkMaxPIDController m_frontLeftDrivePID,
+                                 rev::SparkMaxPIDController m_frontRightDrivePID,
+                                 rev::SparkMaxPIDController m_rearLeftDrivePID,
+                                 rev::SparkMaxPIDController m_rearRightDrivePID);
 
-void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_DrivePID,
-                                rev::SparkMaxPIDController m_DrivePID,
-                                rev::SparkMaxPIDController m_DrivePID,
-                                rev::SparkMaxPIDController m_DrivePID);
+void SwerveDriveMotorConfigsCal(rev::SparkMaxPIDController m_frontLeftDrivePID,
+                                rev::SparkMaxPIDController m_frontRightDrivePID,
+                                rev::SparkMaxPIDController m_rearLeftDrivePID,
+                                rev::SparkMaxPIDController m_rearRightDrivePID);
 
 void DriveControlInit(void);
 
@@ -50,8 +50,8 @@ void DriveControlMain(double              L_JoyStick1Axis1Y,   // swerve control
                       double             *Le_RPM_SD_WheelSpeedCmnd,
                       double             *L_k_SD_WheelAngleCmnd);
 
-void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_DrivePID,
-                            rev::SparkMaxPIDController m_DrivePID,
-                            rev::SparkMaxPIDController m_DrivePID,
-                            rev::SparkMaxPIDController m_DrivePID);
+void SwerveDriveReconfigPID(rev::SparkMaxPIDController m_frontLeftDrivePID,
+                            rev::SparkMaxPIDController m_frontRightDrivePID,
+                            rev::SparkMaxPIDController m_rearLeftDrivePID,
+                            rev::SparkMaxPIDController m_rearRightDrivePID);
 
