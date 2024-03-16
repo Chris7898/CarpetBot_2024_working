@@ -110,7 +110,7 @@ void Robot::RobotInit()
                    m_WristEncoder,
                    m_GripperEncoder);
 
-  bool CompressorEnable = m_pcmCompressor.Enabled();
+  // bool CompressorEnable = m_pcmCompressor.Enabled();
 #endif
 
   GyroInit();
